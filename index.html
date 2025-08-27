@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymPass NFT - Mobile App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen active">
+            <div class="login-container">
+                <div class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    <h1>GymPass NFT</h1>
+                </div>
+                <p class="tagline">Your Digital Gym Membership</p>
+                <button class="line-login-btn" onclick="loginWithLine()">
+                    <i class="fab fa-line"></i>
+                    Login with LINE
+                </button>
+            </div>
+        </div>
+
+        <!-- Main App -->
+        <div id="main-app" class="screen">
+            <!-- Header -->
+            <header class="app-header">
+                <img src="./img/logo.png" alt="GymPass" class="logo" style="width: 100px; height: 70px;margin-bottom: 0px">
+                <div class="header-actions">
+                    <i class="fas fa-bell"></i>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <main class="content">
+                <!-- Home Page -->
+                <div id="home-page" class="page active">
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <img src="./img/profile.png" alt="Profile" class="profile-avatar">
+                            <div>
+                                <h3>John Doe</h3>
+                                <p>Premium Member</p>
+                            </div>
+                            <button class="qr-btn" onclick="showQRCode()">
+                                <i class="fas fa-qrcode"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="wallet-card">
+                        <div class="wallet-header">
+                            <h3>KRW Wallet</h3>
+                            <button class="deposit-btn" onclick="showDepositModal()">
+                                <i class="fas fa-plus"></i> Deposit
+                            </button>
+                        </div>
+                        <div class="wallet-info">
+                            <p class="wallet-address">0x1234...5678</p>
+                            <p class="balance">₩125,000 KRW</p>
+                        </div>
+                    </div>
+
+                    <div class="membership-card">
+                        <div class="card-header">
+                            <h3>Current Membership</h3>
+                            <span class="status active">Active</span>
+                        </div>
+                        <div class="gym-info">
+                            <h4>FitZone Downtown</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> 123 Main St, Downtown</p>
+                            <p><i class="fas fa-calendar"></i> Expires: Dec 31, 2024</p>
+                        </div>
+                        <div class="escrow-details">
+                            <div class="escrow-row">
+                                <span class="escrow-label">Original Value:</span>
+                                <span class="escrow-value">₩1,440,000</span>
+                            </div>
+                            <div class="escrow-row">
+                                <span class="escrow-label">Escrowed Funds:</span>
+                                <span class="escrow-value highlight">₩960,000</span>
+                            </div>
+                            <div class="escrow-row">
+                                <span class="escrow-label">Remaining Term:</span>
+                                <span class="escrow-value">8 months</span>
+                            </div>
+                            <div class="membership-progress">
+                                <div class="progress-bar-home">
+                                    <div class="progress-fill-home" style="width: 67%"></div>
+                                </div>
+                                <span class="progress-text">67% remaining</span>
+                            </div>
+                        </div>
+                        <div class="nft-info">
+                            <p>NFT ID: #GYM001234</p>
+                            <div class="nft-features">
+                                <span class="feature-tag">Transferable</span>
+                                <span class="feature-tag">Refundable</span>
+                                <span class="feature-tag">Insured</span>
+                            </div>
+                            <div class="nft-actions">
+                                <button class="view-nft-btn">View NFT</button>
+                                <button class="transfer-nft-btn" onclick="transferNFT()">Transfer</button>
+                                <button class="sell-nft-btn" onclick="sellNFT()">Sell</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h3>Quick Actions</h3>
+                        <div class="action-grid">
+                            <button class="action-btn" onclick="showPage('find-gym')">
+                                <i class="fas fa-search"></i>
+                                Find Gyms
+                            </button>
+                            <button class="action-btn" onclick="showPage('marketplace')">
+                                <i class="fas fa-store"></i>
+                                Marketplace
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find Gym Page -->
+                <div id="find-gym-page" class="page">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search gyms..." id="gym-search">
+                        <i class="fas fa-search"></i>
+                    </div>
+
+                    <div class="filter-tabs">
+                        <button class="filter-tab active">Nearby</button>
+                        <button class="filter-tab">Popular</button>
+                        <button class="filter-tab">Premium</button>
+                    </div>
+
+                    <div class="gym-list">
+                        <div class="gym-card">
+                            <img src="./img/powerfit.png" alt="Gym" class="gym-image">
+                            <div class="gym-details">
+                                <h4>PowerFit Gym</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> 0.8 km away</p>
+                                <p class="price">From ₩89,000/month</p>
+                                <div class="gym-actions">
+                                    <button class="primary-btn" onclick="showGymDetails('PowerFit Gym')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="gym-card">
+                            <img src="./img/flexzone.png" alt="Gym" class="gym-image">
+                            <div class="gym-details">
+                                <h4>FlexZone Studio</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> 1.5 km away</p>
+                                <p class="price">From ₩95,000/month</p>
+                                <div class="gym-actions">
+                                    <button class="primary-btn" onclick="showGymDetails('FlexZone Studio')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="gym-card sold-out">
+                            <div class="sold-out-badge">Sold Out</div>
+                            <img src="./img/elite.png" alt="Gym" class="gym-image">
+                            <div class="gym-details">
+                                <h4>Elite Fitness</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> 2.1 km away</p>
+                                <p class="price">From ₩89,000/month</p>
+                                <div class="gym-actions">
+                                    <button class="primary-btn" onclick="showGymDetails('Elite Fitness')">View Details</button>
+                                    <button class="marketplace-btn" onclick="showMarketplace('Elite Fitness')">Marketplace</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="gym-card">
+                            <img src="./img/bodyzone.png" alt="Gym" class="gym-image">
+                            <div class="gym-details">
+                                <h4>BodyZone</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> 3.2 km away</p>
+                                <p class="price">From ₩85,000/month</p>
+                                <div class="gym-actions">
+                                    <button class="primary-btn" onclick="showGymDetails('BodyZone')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marketplace Page -->
+                <div id="marketplace-page" class="page">
+                    <div class="marketplace-header">
+                        <h3>Secondary Marketplace</h3>
+                        <div class="search-filter">
+                            <input type="text" placeholder="Search NFTs..." id="nft-search">
+                            <button class="filter-btn"><i class="fas fa-filter"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="filter-options">
+                        <select id="location-filter">
+                            <option>All Locations</option>
+                            <option>Downtown</option>
+                            <option>Uptown</option>
+                            <option>Suburbs</option>
+                        </select>
+                        <select id="brand-filter">
+                            <option>All Brands</option>
+                            <option>PowerFit</option>
+                            <option>FlexZone</option>
+                            <option>Elite Fitness</option>
+                        </select>
+                        <select id="sort-filter">
+                            <option>Sort by Distance</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest First</option>
+                        </select>
+                    </div>
+
+                    <div class="nft-grid">
+                        <div class="nft-card">
+                            <img src="./img/powerfit.png" alt="NFT" class="nft-image">
+                            <div class="nft-info">
+                                <div class="nft-header">
+                                    <h4>PowerFit Premium Pass</h4>
+                                    <button class="gym-link-btn" onclick="showGymDetails('PowerFit Gym')">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                                <p class="nft-location">Downtown Location</p>
+                                <div class="nft-details">
+                                    <div class="detail-row">
+                                        <span class="label">Duration:</span>
+                                        <span class="value">6 months</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Expires:</span>
+                                        <span class="value">Mar 15, 2025</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Remaining:</span>
+                                        <span class="value remaining">4.2 months</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Escrowed:</span>
+                                        <span class="value escrowed">₩420,000</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Insurance:</span>
+                                        <span class="value insured">✅ Protected</span>
+                                    </div>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 70%"></div>
+                                </div>
+                                <div class="price-comparison">
+                                    <div class="official-price">
+                                        <span class="price-label">Official Price:</span>
+                                        <span class="price-value original">₩480,000</span>
+                                    </div>
+                                    <div class="marketplace-price">
+                                        <span class="price-label">Marketplace:</span>
+                                        <span class="price-value current">₩320,000</span>
+                                    </div>
+                                    <div class="savings">
+                                        <span class="savings-badge">Save ₩160,000 (33%)</span>
+                                    </div>
+                                </div>
+                                <p class="distance">0.8 km away</p>
+                                <button class="buy-btn" onclick="showBuyModal('PowerFit Premium Pass', '₩320,000', '4.2 months', '₩420,000')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <div class="nft-card">
+                            <img src="./img/flexzone.png" alt="NFT" class="nft-image">
+                            <div class="nft-info">
+                                <div class="nft-header">
+                                    <h4>FlexZone Annual Pass</h4>
+                                    <button class="gym-link-btn" onclick="showGymDetails('FlexZone Studio')">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                                <p class="nft-location">Uptown Location</p>
+                                <div class="nft-details">
+                                    <div class="detail-row">
+                                        <span class="label">Duration:</span>
+                                        <span class="value">12 months</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Expires:</span>
+                                        <span class="value">Aug 20, 2025</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Remaining:</span>
+                                        <span class="value remaining">8.5 months</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Escrowed:</span>
+                                        <span class="value escrowed">₩680,000</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Insurance:</span>
+                                        <span class="value insured">✅ Protected</span>
+                                    </div>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 71%"></div>
+                                </div>
+                                <div class="price-comparison">
+                                    <div class="official-price">
+                                        <span class="price-label">Official Price:</span>
+                                        <span class="price-value original">₩840,000</span>
+                                    </div>
+                                    <div class="marketplace-price">
+                                        <span class="price-label">Marketplace:</span>
+                                        <span class="price-value current">₩580,000</span>
+                                    </div>
+                                    <div class="savings">
+                                        <span class="savings-badge">Save ₩260,000 (31%)</span>
+                                    </div>
+                                </div>
+                                <p class="distance">1.5 km away</p>
+                                <button class="buy-btn" onclick="showBuyModal('FlexZone Annual Pass', '₩580,000', '8.5 months', '₩680,000')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <div class="nft-card hot-deal">
+                            <div class="hot-badge">🔥 Hot Deal</div>
+                            <img src="./img/elite.png" alt="NFT" class="nft-image">
+                            <div class="nft-info">
+                                <div class="nft-header">
+                                    <h4>Elite Fitness VIP</h4>
+                                    <button class="gym-link-btn" onclick="showGymDetails('Elite Fitness')">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                                <p class="nft-location">Downtown Location</p>
+                                <div class="nft-details">
+                                    <div class="detail-row">
+                                        <span class="label">Duration:</span>
+                                        <span class="value">24 months</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Expires:</span>
+                                        <span class="value">Jun 10, 2026</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Remaining:</span>
+                                        <span class="value remaining">18.3 months</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Escrowed:</span>
+                                        <span class="value escrowed">₩2,440,000</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Insurance:</span>
+                                        <span class="value insured">✅ Protected</span>
+                                    </div>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 76%"></div>
+                                </div>
+                                <div class="price-comparison">
+                                    <div class="official-price">
+                                        <span class="price-label">Official Price:</span>
+                                        <span class="price-value original">₩3,100,000</span>
+                                    </div>
+                                    <div class="marketplace-price">
+                                        <span class="price-label">Marketplace:</span>
+                                        <span class="price-value current">₩1,980,000</span>
+                                    </div>
+                                    <div class="savings">
+                                        <span class="savings-badge hot">Save ₩1,120,000 (36%)</span>
+                                    </div>
+                                </div>
+                                <p class="distance">2.1 km away</p>
+                                <button class="buy-btn" onclick="showBuyModal('Elite Fitness VIP', '₩1,980,000', '18.3 months', '₩2,440,000')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <div class="nft-card">
+                            <img src="./img/bodyzone.png" alt="NFT" class="nft-image">
+                            <div class="nft-info">
+                                <div class="nft-header">
+                                    <h4>BodyZone 3-Month Pass</h4>
+                                    <button class="gym-link-btn" onclick="showGymDetails('BodyZone')">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                                <p class="nft-location">Gangnam Location</p>
+                                <div class="nft-details">
+                                    <div class="detail-row">
+                                        <span class="label">Duration:</span>
+                                        <span class="value">3 months</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Expires:</span>
+                                        <span class="value">Oct 12, 2024</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Remaining:</span>
+                                        <span class="value remaining">1.8 months</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Escrowed:</span>
+                                        <span class="value escrowed">₩144,000</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Insurance:</span>
+                                        <span class="value insured">✅ Protected</span>
+                                    </div>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 60%"></div>
+                                </div>
+                                <div class="price-comparison">
+                                    <div class="official-price">
+                                        <span class="price-label">Official Price:</span>
+                                        <span class="price-value original">₩240,000</span>
+                                    </div>
+                                    <div class="marketplace-price">
+                                        <span class="price-label">Marketplace:</span>
+                                        <span class="price-value current">₩150,000</span>
+                                    </div>
+                                    <div class="savings">
+                                        <span class="savings-badge">Save ₩90,000 (38%)</span>
+                                    </div>
+                                </div>
+                                <p class="distance">3.2 km away</p>
+                                <button class="buy-btn" onclick="showBuyModal('BodyZone 3-Month Pass', '₩150,000', '1.8 months', '₩144,000')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <div class="nft-card">
+                            <img src="./img/fitmax.png" alt="NFT" class="nft-image">
+                            <div class="nft-info">
+                                <div class="nft-header">
+                                    <h4>FitMax Monthly Pass</h4>
+                                    <button class="gym-link-btn" onclick="showGymDetails('FitMax')">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                                <p class="nft-location">Hongdae Location</p>
+                                <div class="nft-details">
+                                    <div class="detail-row">
+                                        <span class="label">Duration:</span>
+                                        <span class="value">6 months</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Remaining:</span>
+                                        <span class="value remaining">4.2 months</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Expires:</span>
+                                        <span class="value">Mar 15, 2025</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Insurance:</span>
+                                        <span class="value insured">✓ Protected</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Escrowed:</span>
+                                        <span class="value escrowed">₩420,000</span>
+                                    </div>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 75%"></div>
+                                </div>
+                                <div class="price-comparison">
+                                    <div class="official-price">
+                                        <span class="price-label">Official Price:</span>
+                                        <span class="price-value original">₩89,000</span>
+                                    </div>
+                                    <div class="marketplace-price">
+                                        <span class="price-label">Marketplace:</span>
+                                        <span class="price-value current">₩68,000</span>
+                                    </div>
+                                    <div class="savings">
+                                        <span class="savings-badge">Save ₩21,000 (24%)</span>
+                                    </div>
+                                </div>
+                                <p class="distance">2.8 km away</p>
+                                <button class="buy-btn" onclick="showBuyModal('FitMax Monthly Pass', '₩68,000', '3 weeks', '₩75,000')">Buy Now</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Gym Detail Page -->
+                <div id="gym-detail-page" class="page">
+                    <div class="back-button">
+                        <button onclick="showPage('find-gym')" class="back-btn">
+                            <i class="fas fa-arrow-left"></i> Back to Gyms
+                        </button>
+                    </div>
+                    <div class="gym-detail-header">
+                        <img src="./img/powerfit.png" alt="Gym" class="gym-hero-image">
+                        <div class="gym-basic-info">
+                            <h2 id="gym-detail-name">PowerFit Gym</h2>
+                            <div class="gym-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-text">4.8 (234 reviews)</span>
+                            </div>
+                            <p class="gym-location"><i class="fas fa-map-marker-alt"></i> 123 Fitness Street, Downtown Seoul</p>
+                            <p class="active-members"><i class="fas fa-users"></i> 1,247 Active Members</p>
+                        </div>
+                    </div>
+
+                    <div class="gym-details-content">
+                        <!-- Working Hours -->
+                        <div class="info-section">
+                            <h3><i class="fas fa-clock"></i> Working Hours</h3>
+                            <div class="hours-grid">
+                                <div class="hour-item">
+                                    <span>Mon - Fri</span>
+                                    <span>05:00 - 23:00</span>
+                                </div>
+                                <div class="hour-item">
+                                    <span>Saturday</span>
+                                    <span>06:00 - 22:00</span>
+                                </div>
+                                <div class="hour-item">
+                                    <span>Sunday</span>
+                                    <span>07:00 - 21:00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Membership Options -->
+                        <div class="info-section">
+                            <h3><i class="fas fa-id-card"></i> Membership NFT Options</h3>
+                            <div class="membership-options">
+                                <div class="membership-option">
+                                    <div class="option-header">
+                                        <h4>Basic Monthly</h4>
+                                        <span class="price">₩89,000/month</span>
+                                    </div>
+                                    <div class="option-details">
+                                        <p>Duration: 1 month</p>
+                                        <p>Refundable: 7 days only</p>
+                                        <p>Insurance: Not available</p>
+                                        <p>Transferable: Yes</p>
+                                    </div>
+                                    <button class="mint-btn" onclick="showMintModal('PowerFit Gym', 'Downtown Seoul', 'basic', 89000, '1 month')">Mint NFT</button>
+                                </div>
+
+                                <div class="membership-option popular">
+                                    <div class="popular-badge">Most Popular</div>
+                                    <div class="option-header">
+                                        <h4>Premium 6-Month</h4>
+                                        <span class="price">₩480,000 <small>(₩80k/month)</small></span>
+                                    </div>
+                                    <div class="option-details">
+                                        <p>Duration: 6 months</p>
+                                        <p>Refundable: 30 days</p>
+                                        <p>Insurance: Protected</p>
+                                        <p>Transferable: Yes</p>
+                                        <p>Bonus: Free PT session</p>
+                                    </div>
+                                    <button class="mint-btn" onclick="showMintModal('PowerFit Gym', 'Downtown Seoul', 'premium', 480000, '6 months')">Mint NFT</button>
+                                </div>
+
+                                <div class="membership-option sold-out-option">
+                                    <div class="option-header">
+                                        <h4>Annual VIP</h4>
+                                        <span class="price">₩840,000 <small>(₩70k/month)</small></span>
+                                        <span class="sold-out-label">Sold Out</span>
+                                    </div>
+                                    <div class="option-details">
+                                        <p>Duration: 12 months</p>
+                                        <p>Refundable: 60 days</p>
+                                        <p>Insurance: Protected</p>
+                                        <p>Transferable: Yes</p>
+                                        <p>Bonus: Unlimited PT + Sauna</p>
+                                    </div>
+                                    <button class="mint-btn disabled" disabled>Sold Out</button>
+                                    <button class="marketplace-redirect-btn" onclick="showPage('marketplace')">
+                                        Check Marketplace
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Insurance Pool -->
+                        <div class="info-section">
+                            <h3><i class="fas fa-shield-alt"></i> Insurance Pool Investment</h3>
+                            <div class="insurance-pool">
+                                <div class="pool-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Total Pool Size</span>
+                                        <span class="stat-value">₩45,600,000</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Available Capacity</span>
+                                        <span class="stat-value available">₩12,400,000</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Current APY</span>
+                                        <span class="stat-value apy">8.5%</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Lock Period</span>
+                                        <span class="stat-value">6 months</span>
+                                    </div>
+                                </div>
+                                <div class="pool-description">
+                                    <p>Earn passive income by providing insurance coverage for gym memberships. Your funds help guarantee refunds and protect members.</p>
+                                    <div class="risk-info">
+                                        <p><strong>Risk Level:</strong> Low-Medium</p>
+                                        <p><strong>Minimum Investment:</strong> ₩100,000</p>
+                                    </div>
+                                </div>
+                                <button class="invest-btn" onclick="showInvestModal()">Invest in Pool</button>
+                            </div>
+                        </div>
+
+                        <!-- Amenities -->
+                        <div class="info-section">
+                            <h3><i class="fas fa-dumbbell"></i> Amenities</h3>
+                            <div class="amenities-grid">
+                                <div class="amenity-item">
+                                    <i class="fas fa-swimming-pool"></i>
+                                    <span>Swimming Pool</span>
+                                </div>
+                                <div class="amenity-item">
+                                    <i class="fas fa-hot-tub"></i>
+                                    <span>Sauna & Steam</span>
+                                </div>
+                                <div class="amenity-item">
+                                    <i class="fas fa-user-tie"></i>
+                                    <span>Personal Training</span>
+                                </div>
+                                <div class="amenity-item">
+                                    <i class="fas fa-users"></i>
+                                    <span>Group Classes</span>
+                                </div>
+                                <div class="amenity-item">
+                                    <i class="fas fa-parking"></i>
+                                    <span>Free Parking</span>
+                                </div>
+                                <div class="amenity-item">
+                                    <i class="fas fa-wifi"></i>
+                                    <span>Free WiFi</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reviews -->
+                        <div class="info-section">
+                            <h3><i class="fas fa-comments"></i> Recent Reviews</h3>
+                            <div class="reviews-list">
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="reviewer-info">
+                                            <img src="./img/profile.png" alt="User" class="reviewer-avatar">
+                                            <div>
+                                                <h5>김민수</h5>
+                                                <div class="review-stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="review-date">2 days ago</span>
+                                    </div>
+                                    <p class="review-text">Great gym with modern equipment. The NFT membership system is innovative and I love that I can transfer it if needed.</p>
+                                </div>
+
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="reviewer-info">
+                                            <img src="./img/profile.png" alt="User" class="reviewer-avatar">
+                                            <div>
+                                                <h5>이지은</h5>
+                                                <div class="review-stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="review-date">1 week ago</span>
+                                    </div>
+                                    <p class="review-text">Clean facilities and friendly staff. The insurance pool gives me confidence in my membership investment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Page -->
+                <div id="profile-page" class="page">
+                    <div class="profile-header">
+                        <img src="./img/profile.png" alt="Profile" class="profile-large">
+                        <h3>John Doe</h3>
+                        <p>john.doe@email.com</p>
+                    </div>
+
+                    <div class="settings-list">
+                        <div class="setting-item" onclick="showQRCode()">
+                            <i class="fas fa-qrcode"></i>
+                            <span>Show QR Pass</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="setting-item">
+                            <i class="fas fa-user"></i>
+                            <span>Edit Profile</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="setting-item">
+                            <i class="fas fa-wallet"></i>
+                            <span>Wallet Settings</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="setting-item">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="setting-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Privacy & Security</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="setting-item">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Help & Support</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="setting-item">
+                            <i class="fas fa-info-circle"></i>
+                            <span>About</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="setting-item logout" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <button class="nav-item active" onclick="showPage('home')">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </button>
+                <button class="nav-item" onclick="showPage('find-gym')">
+                    <i class="fas fa-search"></i>
+                    <span>Find Gym</span>
+                </button>
+                <button class="nav-item" onclick="showPage('marketplace')">
+                    <i class="fas fa-store"></i>
+                    <span>Marketplace</span>
+                </button>
+                <button class="nav-item" onclick="showPage('profile')">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Modals -->
+        <div id="gym-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-gym-name">Gym Details</h3>
+                    <button class="close-btn" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://via.placeholder.com/300x200" alt="Gym" class="modal-gym-image">
+                    <div class="gym-details-full">
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Fitness Street, Downtown</p>
+                        <p><i class="fas fa-clock"></i> Open 24/7</p>
+                        <p><i class="fas fa-star"></i> 4.8 (234 reviews)</p>
+                        <div class="amenities">
+                            <h4>Amenities</h4>
+                            <div class="amenity-tags">
+                                <span class="tag">Pool</span>
+                                <span class="tag">Sauna</span>
+                                <span class="tag">Personal Training</span>
+                                <span class="tag">Group Classes</span>
+                            </div>
+                        </div>
+                        <div class="pricing">
+                            <h4>Membership NFT</h4>
+                            <p class="price-large">₩120,000/month</p>
+                            <div class="nft-terms">
+                                <div class="term-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>12 months duration</span>
+                                </div>
+                                <div class="term-item">
+                                    <i class="fas fa-undo"></i>
+                                    <span>30-day refund policy</span>
+                                </div>
+                                <div class="term-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Insurance protected</span>
+                                </div>
+                                <div class="term-item">
+                                    <i class="fas fa-exchange-alt"></i>
+                                    <span>Fully transferable</span>
+                                </div>
+                            </div>
+                            <button class="buy-membership-btn" onclick="showMintModal('PowerFit Gym', 'Downtown Seoul', 'premium', 480000, '6 months')">Mint Membership NFT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR Code Modal -->
+        <div id="qr-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Gym Access Pass</h3>
+                    <button class="close-btn" onclick="closeQRModal()">&times;</button>
+                </div>
+                <div class="modal-body qr-modal-body">
+                    <div class="qr-code-container">
+                        <div class="qr-code">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <p class="qr-text">Show this QR code at gym entrance</p>
+                        <p class="membership-info">FitZone Downtown - Premium Pass</p>
+                        <p class="valid-until">Valid until: Dec 31, 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deposit Modal -->
+        <div id="deposit-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Deposit KRW</h3>
+                    <button class="close-btn" onclick="closeDepositModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="deposit-form">
+                        <div class="current-balance">
+                            <p>Current Balance: <strong>₩125,000</strong></p>
+                        </div>
+                        <div class="deposit-input">
+                            <label>Amount to Deposit</label>
+                            <input type="number" id="deposit-amount" placeholder="Enter amount in KRW" min="1000">
+                        </div>
+                        <div class="deposit-methods">
+                            <h4>Deposit Method</h4>
+                            <div class="deposit-tabs">
+                                <button class="deposit-tab active" onclick="switchDepositTab('web2', event)">
+                                    <i class="fas fa-credit-card"></i>
+                                    Web2 Payment
+                                </button>
+                                <button class="deposit-tab" onclick="switchDepositTab('crypto', event)">
+                                    <i class="fas fa-wallet"></i>
+                                    Crypto Wallet
+                                </button>
+                            </div>
+                            
+                            <div id="web2-options" class="payment-options active">
+                                <button class="payment-btn active">
+                                    <i class="fas fa-credit-card"></i>
+                                    Credit Card
+                                </button>
+                                <button class="payment-btn">
+                                    <i class="fas fa-university"></i>
+                                    Bank Transfer
+                                </button>
+                                <button class="payment-btn">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    KakaoPay
+                                </button>
+                            </div>
+                            
+                            <div id="crypto-options" class="payment-options">
+                                <div class="crypto-info">
+                                    <p><strong>Supported Tokens:</strong></p>
+                                    <div class="token-list">
+                                        <span class="token">USDT</span>
+                                        <span class="token">USDC</span>
+                                        <span class="token">ETH</span>
+                                        <span class="token">BTC</span>
+                                    </div>
+                                    <p class="conversion-note">Automatically converted to KRW stablecoin at current market rate</p>
+                                </div>
+                                <button class="connect-wallet-btn">
+                                    <i class="fas fa-link"></i>
+                                    Connect Wallet
+                                </button>
+                            </div>
+                        </div>
+                        <button class="confirm-deposit-btn" onclick="confirmDeposit()">
+                            Confirm Deposit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buy NFT Modal -->
+        <div id="buy-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Purchase NFT Membership</h3>
+                    <button class="close-btn" onclick="closeBuyModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="buy-form">
+                        <div class="nft-purchase-preview">
+                            <h4 id="buy-nft-name">NFT Name</h4>
+                            <div class="purchase-details">
+                                <div class="detail-row">
+                                    <span>Remaining Term:</span>
+                                    <span id="buy-remaining">-</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Escrowed Funds:</span>
+                                    <span id="buy-escrowed">-</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Purchase Price:</span>
+                                    <span id="buy-price" class="highlight">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-section">
+                            <h5>Payment Method</h5>
+                            <div class="wallet-balance">
+                                <span>Your KRW Balance: </span>
+                                <span class="balance-amount">₩125,000</span>
+                            </div>
+                            <div class="payment-options-buy">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="wallet" checked>
+                                    <span class="option-content">
+                                        <i class="fas fa-wallet"></i>
+                                        <span>KRW Wallet</span>
+                                    </span>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="deposit">
+                                    <span class="option-content">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Deposit & Buy</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="transaction-summary">
+                            <h5>Transaction Summary</h5>
+                            <div class="summary-row">
+                                <span>NFT Price:</span>
+                                <span id="summary-price">-</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Platform Fee (2%):</span>
+                                <span id="summary-fee">-</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total:</span>
+                                <span id="summary-total">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="purchase-benefits">
+                            <h5>What You'll Receive</h5>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Full NFT ownership & transferability</li>
+                                <li><i class="fas fa-check"></i> Access to gym facilities</li>
+                                <li><i class="fas fa-check"></i> Escrowed funds protection</li>
+                                <li><i class="fas fa-check"></i> Refund eligibility (if applicable)</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="confirm-purchase-btn" onclick="confirmPurchase()">
+                            Confirm Purchase
+                        </button>
+                        
+                        <div class="gym-redirect">
+                            <p>Want to check the gym first?</p>
+                            <button class="gym-details-btn" onclick="redirectToGym()">
+                                <i class="fas fa-dumbbell"></i> View Gym Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sell NFT Modal -->
+        <div id="sell-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Sell Your NFT Membership</h3>
+                    <button class="close-btn" onclick="closeSellModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="sell-form">
+                        <div class="nft-sell-preview">
+                            <h4>FitZone Downtown - Premium Pass</h4>
+                            <p>NFT ID: #GYM001234</p>
+                            <div class="sell-details">
+                                <div class="detail-row">
+                                    <span>Remaining Term:</span>
+                                    <span>8 months</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Expires:</span>
+                                    <span>Dec 31, 2024</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Insurance:</span>
+                                    <span class="insured">✓ Protected</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Escrowed Funds:</span>
+                                    <span class="highlight">₩960,000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pricing-section">
+                            <h5>Set Your Price</h5>
+                            <div class="price-suggestions">
+                                <p class="suggestion-label">Suggested pricing based on market data:</p>
+                                <div class="price-options">
+                                    <button class="price-option" onclick="setSellPrice(864000)">
+                                        <span class="price-label">Market Rate</span>
+                                        <span class="price-value">₩864,000</span>
+                                    </button>
+                                    <button class="price-option" onclick="setSellPrice(920000)">
+                                        <span class="price-label">Premium</span>
+                                        <span class="price-value">₩920,000</span>
+                                    </button>
+                                    <button class="price-option" onclick="setSellPrice(800000)">
+                                        <span class="price-label">Quick Sale</span>
+                                        <span class="price-value">₩800,000</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="custom-price">
+                                <label>Custom Price</label>
+                                <input type="number" id="sell-price" placeholder="Enter your price" min="100000" step="10000">
+                                <small>Minimum: ₩100,000</small>
+                            </div>
+                        </div>
+                        
+                        <div class="listing-options">
+                            <h5>Listing Options</h5>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="instant-sale" checked>
+                                <span>Allow instant purchase</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="negotiable">
+                                <span>Accept offers (negotiable)</span>
+                            </label>
+                        </div>
+                        
+                        <div class="fees-breakdown">
+                            <h5>Fee Breakdown</h5>
+                            <div class="fee-row">
+                                <span>Listing Fee:</span>
+                                <span>Free</span>
+                            </div>
+                            <div class="fee-row">
+                                <span>Platform Fee (2%):</span>
+                                <span id="platform-fee">₩0</span>
+                            </div>
+                            <div class="fee-row total">
+                                <span>You'll receive:</span>
+                                <span id="seller-receives">₩0</span>
+                            </div>
+                        </div>
+                        
+                        <button class="confirm-sell-btn" onclick="confirmSell()">
+                            List for Sale
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Investment Modal -->
+        <div id="investment-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Invest in Insurance Pool</h3>
+                    <button class="close-btn" onclick="closeInvestModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="investment-form">
+                        <div class="pool-summary">
+                            <h4>PowerFit Gym Insurance Pool</h4>
+                            <div class="summary-stats">
+                                <div class="summary-item">
+                                    <span>Current APY:</span>
+                                    <span class="highlight">8.5%</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Lock Period:</span>
+                                    <span>6 months</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Available Capacity:</span>
+                                    <span>₩12,400,000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="investment-input">
+                            <label>Investment Amount</label>
+                            <input type="number" id="investment-amount" placeholder="Minimum ₩100,000" min="100000" step="10000">
+                        </div>
+                        
+                        <div class="investment-calculator">
+                            <h5>Projected Returns</h5>
+                            <div class="calc-result">
+                                <div class="calc-item">
+                                    <span>6-month return:</span>
+                                    <span id="projected-return">₩0</span>
+                                </div>
+                                <div class="calc-item">
+                                    <span>Total after 6 months:</span>
+                                    <span id="total-return">₩0</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="risk-disclosure">
+                            <h5>Risk Disclosure</h5>
+                            <ul>
+                                <li>Your funds provide insurance coverage for gym memberships</li>
+                                <li>Returns depend on pool performance and claim rates</li>
+                                <li>Funds are locked for 6 months minimum</li>
+                                <li>Early withdrawal may incur penalties</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="confirm-investment-btn" onclick="confirmInvestment()">
+                            Confirm Investment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Popup Modal -->
+        <div id="custom-popup" class="modal">
+            <div class="modal-content custom-popup-content">
+                <div class="modal-header">
+                    <h3 id="popup-title">Notification</h3>
+                    <button class="close-btn" onclick="closeCustomPopup()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="popup-content">
+                        <p id="popup-message">This is a custom popup message.</p>
+                    </div>
+                    <div class="popup-actions">
+                        <button id="popup-confirm-btn" class="popup-btn primary" onclick="closeCustomPopup()">OK</button>
+                        <button id="popup-cancel-btn" class="popup-btn secondary" onclick="closeCustomPopup()" style="display: none;">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mint NFT Modal -->
+        <div id="mint-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Mint New NFT Membership</h3>
+                    <button class="close-btn" onclick="closeMintModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="mint-form">
+                        <div class="gym-selection">
+                            <h4 id="mint-gym-name">PowerFit Gym</h4>
+                            <p class="gym-location-mint"><i class="fas fa-map-marker-alt"></i> <span id="mint-gym-location">Downtown Seoul</span></p>
+                        </div>
+                        
+                        <div class="selected-membership-display" id="selected-membership-display" style="display: none;">
+                            <h5>Selected Membership</h5>
+                            <div class="membership-card-mint">
+                                <div class="membership-header-mint">
+                                    <h6 id="display-membership-type">-</h6>
+                                    <span class="price-display" id="display-price">-</span>
+                                </div>
+                                <div class="membership-features-display" id="display-features">
+                                    <!-- Features will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="selected-membership-summary" id="selected-membership-summary" style="display: none;">
+                            <h5>Selected Membership</h5>
+                            <div class="summary-details">
+                                <div class="summary-row">
+                                    <span>Type:</span>
+                                    <span id="summary-type">-</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Duration:</span>
+                                    <span id="summary-duration">-</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Price:</span>
+                                    <span id="summary-price">-</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Escrowed Amount:</span>
+                                    <span id="summary-escrowed">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-section-mint">
+                            <h5>Payment Method</h5>
+                            <div class="wallet-balance-mint">
+                                <span>Your KRW Balance: </span>
+                                <span class="balance-amount-mint">₩125,000</span>
+                            </div>
+                            <div class="payment-options-mint">
+                                <label class="payment-option-mint">
+                                    <input type="radio" name="mint-payment" value="wallet" checked>
+                                    <span class="option-content-mint">
+                                        <i class="fas fa-wallet"></i>
+                                        <span>KRW Wallet</span>
+                                    </span>
+                                </label>
+                                <label class="payment-option-mint">
+                                    <input type="radio" name="mint-payment" value="deposit">
+                                    <span class="option-content-mint">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Deposit & Mint</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="transaction-summary-mint">
+                            <h5>Transaction Summary</h5>
+                            <div class="summary-row-mint">
+                                <span>Membership Price:</span>
+                                <span id="mint-summary-price">-</span>
+                            </div>
+                            <div class="summary-row-mint">
+                                <span>Platform Fee (2%):</span>
+                                <span id="mint-summary-fee">-</span>
+                            </div>
+                            <div class="summary-row-mint total">
+                                <span>Total:</span>
+                                <span id="mint-summary-total">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mint-benefits">
+                            <h5>What You'll Receive</h5>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Full NFT ownership & transferability</li>
+                                <li><i class="fas fa-check"></i> Access to gym facilities</li>
+                                <li><i class="fas fa-check"></i> Escrowed funds protection</li>
+                                <li><i class="fas fa-check"></i> Refund eligibility (if applicable)</li>
+                                <li><i class="fas fa-check"></i> Insurance coverage</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="confirm-mint-btn" id="confirm-mint-btn" onclick="confirmMint()" disabled>
+                            Select Membership Type
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
